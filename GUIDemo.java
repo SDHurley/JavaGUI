@@ -1,6 +1,7 @@
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Random;
 
 import javax.swing.*;
 
@@ -15,25 +16,29 @@ public class GUIDemo extends JFrame
     private JPanel panel;
     private JButton biggerButton;
     private JButton smallerButton;
+    private JButton newPositionButton;
 
     /**
      * Set up the application.
      */
     public GUIDemo()
     {
-	// CONSTRUCTOR NEEDS TO BE FINISHED!
-		setTitle("Bigger/Smaller");
+    // CONSTRUCTOR NEEDS TO BE FINISHED!
+        setTitle("Bigger/Smaller/New Position");
         setSize(200, 100);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         panel = new JPanel();
         biggerButton = new JButton("BIGGER");
         smallerButton = new JButton("SMALLER");
+        newPositionButton = new JButton("NEW POSITION");
         biggerButton.addActionListener(new ButtonHandler());
         smallerButton.addActionListener(new ButtonHandler());
+        newPositionButton.addActionListener(new ButtonHandler());
         add(panel);
         panel.add(biggerButton);
         panel.add(smallerButton);
-        setVisible(true);
+        panel.add(newPositionButton);
+        setVisible(true); 
     }
 
     /**
@@ -54,11 +59,15 @@ public class GUIDemo extends JFrame
             {
                 setSize(size.width + 10, size.height + 10);
             }
-            else
+            else if (e.getSource().equals(smallerButton))
             {
                 setSize(size.width - 10, size.height - 10);
             }
-
+            else
+            {
+                Random gen = new Random();
+                setLocation(gen.nextInt(1080), gen.nextInt(920));
+            }
         }
     }
 
